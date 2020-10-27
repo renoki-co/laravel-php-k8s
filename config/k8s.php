@@ -51,7 +51,7 @@ return [
                 'certificate' => env('KUBE_CERTIFICATE_PATH', null),
                 'key' => env('KUBE_KEY_PATH', null),
                 'ca' => env('KUBE_CA_PATH', null),
-                'verify' => env('VERIFY_SSL', true),
+                'verify' => env('KUBE_VERIFY_SSL', true),
             ],
             'auth' => [
                 'username' => env('KUBE_HTTP_USER', null),
@@ -77,7 +77,7 @@ return [
                 'certificate' => env('KUBE_CERTIFICATE_PATH', null),
                 'key' => env('KUBE_KEY_PATH', null),
                 'ca' => env('KUBE_CA_PATH', null),
-                'verify' => env('VERIFY_SSL', true),
+                'verify' => env('KUBE_VERIFY_SSL', true),
             ],
             'token' => env('KUBE_BEARER_TOKEN', null),
         ],
