@@ -45,8 +45,7 @@ return [
 
         'http' => [
             'driver' => 'http',
-            'host' => env('KUBE_HOST', '127.0.0.1'),
-            'port' => env('KUBE_PORT', 8080),
+            'host' => env('KUBE_HOST', 'http://127.0.0.1:8080'),
             'ssl' => [
                 'certificate' => env('KUBE_CERTIFICATE_PATH', null),
                 'key' => env('KUBE_KEY_PATH', null),
@@ -71,8 +70,7 @@ return [
 
         'token' => [
             'driver' => 'token',
-            'host' => env('KUBE_HOST', '127.0.0.1'),
-            'port' => env('KUBE_PORT', 8080),
+            'host' => env('KUBE_HOST', 'http://127.0.0.1:8080'),
             'ssl' => [
                 'certificate' => env('KUBE_CERTIFICATE_PATH', null),
                 'key' => env('KUBE_KEY_PATH', null),
