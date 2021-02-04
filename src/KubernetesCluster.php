@@ -47,7 +47,7 @@ class KubernetesCluster
      */
     protected function loadFromConfig(array $config)
     {
-        $this->cluster = new PhpK8sCluster('http://127.0.0.1', 8080);
+        $this->cluster = new PhpK8sCluster('http://127.0.0.1:8080');
 
         switch ($config['driver'] ?? null) {
             case 'kubeconfig': $this->configureWithKubeConfigFile($config); break;
@@ -78,9 +78,7 @@ class KubernetesCluster
      */
     protected function configureWithHttpAuth(array $config)
     {
-        $this->cluster = new PhpK8sCluster(
-            $config['host'], $config['port']
-        );
+        $this->cluster = new PhpK8sCluster($config['host']);
 
         if ($config['ssl']['verify'] ?? true) {
             $this->cluster->withCertificate(
@@ -112,9 +110,7 @@ class KubernetesCluster
      */
     protected function configureWithToken(array $config)
     {
-        $this->cluster = new PhpK8sCluster(
-            $config['host'], $config['port']
-        );
+        $this->cluster = new PhpK8sCluster($config['host']);
 
         if ($config['ssl']['verify'] ?? true) {
             $this->cluster->withCertificate(
