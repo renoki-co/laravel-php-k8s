@@ -40,6 +40,11 @@
             "providers": [
                 "RenokiCo\\LaravelK8s\\LaravelK8sServiceProvider"
             ]
+        },
+        "laravel-zero": {
+            "providers": [
+                "RenokiCo\\LaravelK8s\\LaravelK8sServiceProvider"
+            ]
         }
     }
 }
