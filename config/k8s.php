@@ -80,6 +80,21 @@ return [
             'token' => env('KUBE_BEARER_TOKEN', null),
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | In-Cluster Driver
+        |--------------------------------------------------------------------------
+        |
+        | In-Cluster Driver works only if the written PHP app runs
+        | inside a Kubernetes Pod, within a Cluster. The configuration
+        | is being loaded automatically.
+        |
+        */
+
+        'cluster' => [
+            'driver' => 'cluster',
+        ],
+
     ],
 
 ];

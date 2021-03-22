@@ -53,6 +53,7 @@ class KubernetesCluster
             case 'kubeconfig': $this->configureWithKubeConfigFile($config); break;
             case 'http': $this->configureWithHttpAuth($config); break;
             case 'token': $this->configureWithToken($config); break;
+            case 'cluster': $this->configureInCluster(); break;
             default: break;
         }
     }
@@ -129,6 +130,16 @@ class KubernetesCluster
         }
 
         $this->cluster->withToken($config['token']);
+    }
+
+    /**
+     * Load the In-Cluster configuration.
+     *
+     * @return void
+     */
+    protected function configureInCluster()
+    {
+        $this->cluster->inClusterConfiguration();
     }
 
     /**
