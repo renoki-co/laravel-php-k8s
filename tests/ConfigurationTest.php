@@ -3,6 +3,7 @@
 namespace RenokiCo\LaravelK8s\Test;
 
 use RenokiCo\LaravelK8s\LaravelK8sFacade;
+use RenokiCo\PhpK8s\Kinds\K8sResource;
 
 class ConfigurationTest extends TestCase
 {
@@ -107,5 +108,19 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('/path/to/.minikube/client.key', $keyPath);
 
         $this->assertEquals('Bearer some-token', $token);
+    }
+
+    public function test_in_cluster_config()
+    {
+        $cluster = LaravelK8sFacade::connection('cluster')->getCluster();
+
+        [
+            'headers' => ['authorization' => $token],
+            'verify' => $caPath,
+        ] = $cluster->getClient()->getConfig();
+
+        $this->assertEquals('Bearer some-token', $token);
+        $this->assertEquals('/var/run/secrets/kubernetes.io/serviceaccount/ca.crt', $caPath);
+        $this->assertEquals('some-namespace', K8sResource::$defaultNamespace);
     }
 }
