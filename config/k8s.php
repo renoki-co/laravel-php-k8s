@@ -93,6 +93,7 @@ return [
 
         'cluster' => [
             'driver' => 'cluster',
+            'host' => env('KUBE_HOST', 'https://kubernetes.default.svc.cluster.local'),
         ],
 
     ],

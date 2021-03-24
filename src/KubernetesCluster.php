@@ -53,7 +53,7 @@ class KubernetesCluster
             case 'kubeconfig': $this->configureWithKubeConfigFile($config); break;
             case 'http': $this->configureWithHttpAuth($config); break;
             case 'token': $this->configureWithToken($config); break;
-            case 'cluster': $this->configureInCluster(); break;
+            case 'cluster': $this->configureInCluster($config); break;
             default: break;
         }
     }
@@ -135,10 +135,13 @@ class KubernetesCluster
     /**
      * Load the In-Cluster configuration.
      *
+     * @param  array  $config
      * @return void
      */
-    protected function configureInCluster()
+    protected function configureInCluster(array $config)
     {
+        $this->cluster = new PhpK8sCluster($config['host'] ?? 'https://kubernetes.default.svc.cluster.local');
+
         $this->cluster->inClusterConfiguration();
     }
 
