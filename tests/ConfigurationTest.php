@@ -44,8 +44,7 @@ class ConfigurationTest extends TestCase
         $this->app['config']->set('k8s.default', 'http');
         $this->app['config']->set('k8s.connections.http', [
             'driver' => 'http',
-            'host' => env('KUBE_HOST', '127.0.0.1'),
-            'port' => env('KUBE_PORT', 8080),
+            'host' => env('KUBE_HOST', 'http://127.0.0.1:8080'),
             'ssl' => [
                 'certificate' => '/path/to/.minikube/client.crt',
                 'key' => '/path/to/.minikube/client.key',
@@ -82,8 +81,7 @@ class ConfigurationTest extends TestCase
         $this->app['config']->set('k8s.default', 'token');
         $this->app['config']->set('k8s.connections.token', [
             'driver' => 'token',
-            'host' => env('KUBE_HOST', '127.0.0.1'),
-            'port' => env('KUBE_PORT', 8080),
+            'host' => env('KUBE_HOST', 'http://127.0.0.1:8080'),
             'ssl' => [
                 'certificate' => '/path/to/.minikube/client.crt',
                 'key' => '/path/to/.minikube/client.key',
@@ -115,6 +113,12 @@ class ConfigurationTest extends TestCase
 
     public function test_in_cluster_config()
     {
+        $this->app['config']->set('k8s.default', 'cluster');
+        $this->app['config']->set('k8s.connections.cluster', [
+            'driver' => 'cluster',
+            'host' => env('KUBE_HOST', 'https://kubernetes.default.svc.cluster.local'),
+        ]);
+
         $cluster = LaravelK8sFacade::connection('cluster')->getCluster();
 
         [
