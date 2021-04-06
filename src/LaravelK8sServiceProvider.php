@@ -21,11 +21,12 @@ class LaravelK8sServiceProvider extends ServiceProvider
             __DIR__.'/../config/k8s.php', 'k8s'
         );
 
-        $this->app->bind('laravel.k8s', function () {
-            $connection = config('k8s.default', 'kubeconfig');
+        $this->app->bind('laravel.k8s', function ($app) {
+            $config = $app['config']['k8s'];
+            $connection = $config['default'] ?? 'kubeconfig';
 
             return new KubernetesCluster(
-                $this->app['config']['k8s']['connections'][$connection] ?? []
+                $config['connections'][$connection] ?? []
             );
         });
     }
