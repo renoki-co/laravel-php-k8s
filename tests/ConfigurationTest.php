@@ -17,6 +17,7 @@ class ConfigurationTest extends TestCase
 
     public function test_kube_config_file()
     {
+        $this->app['config']->set('k8s.default', 'kubeconfig');
         $this->app['config']->set('k8s.connections.kubeconfig', [
             'driver' => 'kubeconfig',
             'path' => __DIR__.'/cluster/kubeconfig.yaml',
@@ -40,6 +41,7 @@ class ConfigurationTest extends TestCase
 
     public function test_http_authentication()
     {
+        $this->app['config']->set('k8s.default', 'http');
         $this->app['config']->set('k8s.connections.http', [
             'driver' => 'http',
             'host' => env('KUBE_HOST', '127.0.0.1'),
@@ -77,6 +79,7 @@ class ConfigurationTest extends TestCase
 
     public function test_token_authentication()
     {
+        $this->app['config']->set('k8s.default', 'token');
         $this->app['config']->set('k8s.connections.token', [
             'driver' => 'token',
             'host' => env('KUBE_HOST', '127.0.0.1'),
