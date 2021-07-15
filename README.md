@@ -19,51 +19,9 @@ If you are using your application in your day-to-day job, on presentation demos,
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R42U8CL)
 
-## 🚀 Installation
+## 📃 Documentation
 
-You can install the package via composer:
-
-```bash
-composer require renoki-co/laravel-php-k8s
-```
-
-Publish the config:
-
-```bash
-$ php artisan vendor:publish --provider="RenokiCo\LaravelK8s\LaravelK8sServiceProvider" --tag="config"
-```
-
-## 🙌 Usage
-
-The cluster configuration can be found in the `config/k8s.php` file. You can get started directly with the `/.kube/config` file you already have.
-
-```php
-use RenokiCo\LaravelK8s\LaravelK8sFacade;
-
-foreach (LaravelK8sFacade::getAllConfigMaps() as $cm) {
-    // $cm->getName();
-}
-```
-
-For further documentation, check [renoki-co/php-k8s](https://github.com/renoki-co/php-k8s).
-
-## Multiple connections
-
-The package supports multiple connections configurations. If you wish to select a specific one (not the default one), call `connection` before getting the cluster.
-
-```php
-use RenokiCo\LaravelK8s\LaravelK8sFacade;
-
-$cluster = LaravelK8sFacade::connection('http')->getCluster();
-```
-
-## Getting the cluster instance
-
-You can also call `getCluster()` to get the instance of `\RenokiCo\PhpK8s\KubernetesCluster`:
-
-```php
-$cluster = LaravelK8sFacade::getCluster();
-```
+[The entire documentation is available on Gitbook 🌍](https://rennokki.gitbook.io/php-k8s/frameworks/laravel)
 
 ## 🐛 Testing
 
