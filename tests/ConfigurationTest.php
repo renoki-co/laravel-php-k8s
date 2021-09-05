@@ -130,4 +130,29 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('/var/run/secrets/kubernetes.io/serviceaccount/ca.crt', $caPath);
         $this->assertEquals('some-namespace', K8sResource::$defaultNamespace);
     }
+
+    /**
+     * @dataProvider environmentVariableContextProvider
+     */
+    public function test_from_environment_variable(string $context = null, string $expectedDomain)
+    {
+        $_SERVER['KUBECONFIG'] = __DIR__.'/cluster/kubeconfig.yaml::'.__DIR__.'/cluster/kubeconfig-2.yaml';
+
+        $this->app['config']->set('k8s.default', 'variable');
+        $this->app['config']->set('k8s.connections.variable', [
+            'driver' => 'variable',
+            'context' => $context,
+        ]);
+
+        $cluster = LaravelK8sFacade::connection('variable')->getCluster();
+
+        $this->assertSame("https://{$expectedDomain}:8443/?", $cluster->getCallableUrl('/', []));
+    }
+
+    public function environmentVariableContextProvider(): iterable
+    {
+        yield [null, 'minikube'];
+        yield ['minikube-2', 'minikube-2'];
+        yield ['minikube-3', 'minikube-3'];
+    }
 }

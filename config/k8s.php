@@ -96,6 +96,26 @@ return [
             'host' => env('KUBE_HOST', 'https://kubernetes.default.svc.cluster.local'),
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | Environment Variable Driver
+        |--------------------------------------------------------------------------
+        |
+        | The environment variable driver leverages your current (possibly set)
+        | KUBECONFIG environment variable. The variable contains a list of paths
+        | towards multiple kubeconfig files that will be read, merged and based
+        | on the selected context from the configuration, it will connect
+        | to the cluster, just like the "kubeconfig" driver.
+        |
+        | Read more: https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
+        |
+        */
+
+        'environment' => [
+            'driver' => 'environment',
+            'context' => env('KUBECONFIG_CONTEXT', 'minikube'),
+        ],
+
     ],
 
 ];
