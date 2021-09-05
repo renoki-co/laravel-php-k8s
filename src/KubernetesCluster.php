@@ -55,6 +55,7 @@ class KubernetesCluster
             case 'http': $this->configureWithHttpAuth($config); break;
             case 'token': $this->configureWithToken($config); break;
             case 'cluster': $this->configureInCluster($config); break;
+            case 'variable': $this->configureWithKubeConfigVariable($config); break;
             default: break;
         }
     }
@@ -142,6 +143,18 @@ class KubernetesCluster
     protected function configureInCluster(array $config)
     {
         $this->cluster = PhpK8sCluster::inClusterConfiguration();
+    }
+
+    /**
+     * Configure the cluster using the
+     * KUBECONFIG environment variable.
+     *
+     * @param  array  $config
+     * @return void
+     */
+    protected function configureWithKubeConfigVariable(array $config)
+    {
+        $this->cluster = PhpK8sCluster::fromKubeConfigVariable($config['context']);
     }
 
     /**

@@ -7,6 +7,16 @@ use Orchestra\Testbench\TestCase as Orchestra;
 abstract class TestCase extends Orchestra
 {
     /**
+     * {@inheritDoc}
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        unset($_SERVER['KUBECONFIG']);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getPackageProviders($app)
