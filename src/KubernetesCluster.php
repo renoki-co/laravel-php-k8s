@@ -4,6 +4,9 @@ namespace RenokiCo\LaravelK8s;
 
 use RenokiCo\PhpK8s\KubernetesCluster as PhpK8sCluster;
 
+/**
+ * @see \RenokiCo\PhpK8s\KubernetesCluster
+ */
 class KubernetesCluster
 {
     /**
@@ -28,7 +31,7 @@ class KubernetesCluster
      * Switch the connection.
      *
      * @param  string  $connection
-     * @return $this
+     * @return \RenokiCo\LaravelK8s\KubernetesCluster
      */
     public function connection(string $connection)
     {
@@ -47,8 +50,6 @@ class KubernetesCluster
      */
     protected function loadFromConfig(array $config)
     {
-        $this->cluster = new PhpK8sCluster('http://127.0.0.1:8080');
-
         switch ($config['driver'] ?? null) {
             case 'kubeconfig': $this->configureWithKubeConfigFile($config); break;
             case 'http': $this->configureWithHttpAuth($config); break;
@@ -66,7 +67,7 @@ class KubernetesCluster
      */
     protected function configureWithKubeConfigFile(array $config)
     {
-        $this->cluster->fromKubeConfigYamlFile(
+        $this->cluster = PhpK8sCluster::fromKubeConfigYamlFile(
             $config['path'], $config['context']
         );
     }
@@ -79,7 +80,7 @@ class KubernetesCluster
      */
     protected function configureWithHttpAuth(array $config)
     {
-        $this->cluster = new PhpK8sCluster($config['host']);
+        $this->cluster = PhpK8sCluster::fromUrl($config['host']);
 
         if ($config['ssl']['verify'] ?? true) {
             $this->cluster->withCertificate(
@@ -111,7 +112,7 @@ class KubernetesCluster
      */
     protected function configureWithToken(array $config)
     {
-        $this->cluster = new PhpK8sCluster($config['host']);
+        $this->cluster = PhpK8sCluster::fromUrl($config['host']);
 
         if ($config['ssl']['verify'] ?? true) {
             $this->cluster->withCertificate(
@@ -140,9 +141,7 @@ class KubernetesCluster
      */
     protected function configureInCluster(array $config)
     {
-        $this->cluster = new PhpK8sCluster($config['host'] ?? 'https://kubernetes.default.svc.cluster.local');
-
-        $this->cluster->inClusterConfiguration();
+        $this->cluster = PhpK8sCluster::inClusterConfiguration();
     }
 
     /**
