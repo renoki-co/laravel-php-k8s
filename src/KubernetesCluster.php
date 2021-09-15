@@ -108,7 +108,7 @@ class KubernetesCluster
     /**
      * Configure the cluster with a Bearer Token.
      *
-     * @param  array $config
+     * @param  array  $config
      * @return void
      */
     protected function configureWithToken(array $config)
