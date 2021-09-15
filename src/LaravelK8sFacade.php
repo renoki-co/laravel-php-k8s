@@ -100,6 +100,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource] fromYaml(string $yaml)
  * @method static \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource] fromYamlFile(string $path, \Closure $callback = null)
  * @method static \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource] fromTemplatedYamlFile(string $path, array $replace, \Closure $callback = null)
+ * @method static void registerCrd(string $class, string $name = null)
  *
  * @see \RenokiCo\LaravelK8s\KubernetesCluster
  */
