@@ -142,7 +142,9 @@ class KubernetesCluster
      */
     protected function configureInCluster(array $config)
     {
-        $this->cluster = PhpK8sCluster::inClusterConfiguration();
+        $this->cluster = PhpK8sCluster::inClusterConfiguration(
+            $config['host'] ?? 'https://kubernetes.default.svc'
+        );
     }
 
     /**
