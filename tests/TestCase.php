@@ -9,7 +9,7 @@ abstract class TestCase extends Orchestra
     /**
      * {@inheritDoc}
      */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
