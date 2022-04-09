@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "renoki-co/php-k8s": "^3.6"
+        "renoki-co/php-k8s": "^3.7"
     },
     "autoload": {
         "psr-4": {
