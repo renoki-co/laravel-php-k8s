@@ -51,11 +51,16 @@ class KubernetesCluster
     protected function loadFromConfig(array $config)
     {
         switch ($config['driver'] ?? null) {
-            case 'kubeconfig': $this->configureWithKubeConfigFile($config); break;
-            case 'http': $this->configureWithHttpAuth($config); break;
-            case 'token': $this->configureWithToken($config); break;
-            case 'cluster': $this->configureInCluster($config); break;
-            case 'variable': $this->configureWithKubeConfigVariable($config); break;
+            case 'kubeconfig': $this->configureWithKubeConfigFile($config);
+                break;
+            case 'http': $this->configureWithHttpAuth($config);
+                break;
+            case 'token': $this->configureWithToken($config);
+                break;
+            case 'cluster': $this->configureInCluster($config);
+                break;
+            case 'variable': $this->configureWithKubeConfigVariable($config);
+                break;
             default: break;
         }
     }
